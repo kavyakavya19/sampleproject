@@ -5,10 +5,17 @@ from .views import (
     TeamList, TeamDetail,
     TaskList, TaskDetail,
     AssignmentList, AssignmentDetail,
-    StatusList, StatusDetail
+    StatusList, StatusDetail,UserCreate
 )
 
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
 urlpatterns = [
+    path('register/',UserCreate.as_view(),name='create-user'),
+    path('token/',TokenObtainPairView.as_view(),name='get-token'),
+    path('refresh/',TokenRefreshView.as_view(),name='refresh-token'),
     path('Student/', StudentList.as_view(), name='student-list'),
     path('api/Student/<str:pk>/', StudentDetail.as_view(), name='student-detail'),
 
